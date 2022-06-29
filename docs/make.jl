@@ -7,7 +7,7 @@ makedocs(
     pages = [
         "Introduzione" => "intro.md",
         "Stato dell'arte" => "stateart.md",
-        "API Reference" => "index.md",
+        "API Reference" => "indice.md",
         "Dependecy Graph" => "grafodipendenze.md",
         "BackGround Tecnologico" => "background.md",
         "Applicazione Pratica" => "applicazione.md",

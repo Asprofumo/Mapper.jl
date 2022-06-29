@@ -1,6 +1,6 @@
 # Introduzione
 
-<img src="images/sparse.png" alt="matricesparsa" width="500"/>
+![](images/sparse.png)
 
 Linear Algebric Representation (d'ora in avanti LAR) LAR è uno schema
 di rappresentazione generale per la modellazione geometrica e topologica
