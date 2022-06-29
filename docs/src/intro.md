@@ -1,26 +1,64 @@
-# Studio preliminare
+# Introduzione
 
-L'obiettivo del codice contenuto nel file `mapper.jl` è quello di implementare diverse primitive parametriche, incluse curve, superfici e solidi incorporati in 2D o 3D.  
-Ciascun metodo contenuto in questa classe utilizza un approccio costruttivo, ossia genera una scomposizione semplice o cubica di un dominio geometrico semplice nello spazio parametrico *u,v* o *u,v,w*. Quindi un cambio di coordinate, ad es. da coordinate cartesiane a coordinate polari o cilindriche, si applica ai vertici del complesso cellulare decomponendo il suo dominio.  
-Il dominio mappato in questa maniera produce una collezione di curve nello spazio 2D o 3D. Per ottenere una superficie curva chiusa, cioè una collezione senza bordi, come nel caso di una `sfera` in 3D, o della superficie `toroidale` in 3D, viene eseguita un'opportuna identificazione di punti mappati coincidenti.
+<img src="images/sparse.png" alt="matricesparsa" width="500"/>
+
+Linear Algebric Representation (d'ora in avanti LAR) LAR è uno schema
+di rappresentazione generale per la modellazione geometrica e topologica
+(vedi \"Rappresentazione algebrica lineare per strutture topologiche\").
+Il dominio dello schema è fornito da complessi cellulari mentre il suo
+codominio è un insieme di matrici sparse. Altro non è che un package
+scritto in linguaggio Julia per il calcolo geometrico di figure piane e
+solide. Essa fa uso della API (Application Programming Interface)
+[ViewerGL](https://github.com/cvdlab/ViewerGL.jl), sviluppato dalla
+nostra università da una fork di
+[Plasm.jl](https://github.com/plasm-language/pyplasm/tree/master/src/plasm.jl).
+
+## Matrici Sparse
+
+Nell'analisi numerica e nel calcolo scientifico, una matrice sparsa o un
+array sparso è una matrice in cui la maggior parte degli elementi è
+zero. Non esiste una definizione rigida per quanto riguarda la
+proporzione di elementi con valore zero affinché una matrice si
+qualifichi come sparsa, ma un criterio comune è che il numero di
+elementi diversi da zero è all'incirca uguale al numero di righe o
+colonne. Al contrario, se la maggior parte degli elementi è diversa da
+zero, la matrice è considerata densa. Il numero di elementi di valore
+zero diviso per il numero totale di elementi (ad esempio, m × n per una
+matrice m × n) è talvolta indicato come la scarsità della matrice.
+
+## Complessi di Celle
+
+Una cella n-dimensionale chiusa è uno spazio topologico che è omeomorfo
+ad una palla chiusa n-dimensionale. Per esempio, un simplesso è una
+cella chiusa, e più in generale, un politopo convesso è una cella
+chiusa. Una cella n-dimensionale aperta è uno spazio topologico
+omeomorfo alla palla aperta n-dimensionale. Una cella 0-dimensionale
+aperta (e chiusa) è un punto. Informalmente, un complesso di celle è uno
+spazio topologico ottenuto incollando fra loro un certo numero di celle
+chiuse. Formalmente, un complesso di celle è uno spazio di Hausdorff
+**$\chi$** dotato di una partizione in celle aperte (di dimensioni
+variabili) che soddisfa due proprietà:
+
+1.  Per ogni cella n-dimensionale aperta C nella partizione di X, esiste
+    una mappa continua f della palla n-dimensionale chiusa su X tale che
+
+    -   la restrizione di f all'interno della palla chiusa è un
+        omeomorfismo sulla cella C, e
+
+    -   l'immagine del contorno della palla chiusa è contenuta
+        nell'unione di un numero finito di celle aventi tutte dimensione
+        inferiore ad n.
+
+2.  Un sottoinsieme di X è chiuso se e soltanto se incontra la chiusura
+    di ciascuna cella in un insieme chiuso.
+
+Il termine CW-complesso, mutuato dall'inglese, è a volte usato come
+sinonimo di complesso di celle. Le lettere C e W indicano i termini
+inglesi closure-finite e weak-topology e si riferiscono alle due
+proprietà elencate (la seconda proprietà infatti indica che la topologia
+su X è in un certo senso una topologia debole).
 
 
-## Concetti di base di LAR
-L'esempio più semplice di una figura geometrica implementata da LAR è quella di un `quadrato` con un vertice nell'origine:
-
-```julia
-julia> square=([[0.; 0] [0; 1] [1; 0] [1; 1]], [[1,2,3,4]], [[1,2], [1,3], [2,4], [3,4]])
-([0.0 0.0 1.0 1.0; 0.0 1.0 0.0 1.0], Array{Int64,1}[[1, 2, 3, 4]], Array{Int64,1}[[1, 2],
-[1, 3], [2, 4], [3, 4]])
-
-```
-È anche possibile memorizzare gli array contenenti le coordinate dei vertici in delle variabili con nomi convenzionali (`V`, `FV`, `EV`): 
-
-```julia
-julia> V,FV,EV = square
-([0.0 0.0 1.0 1.0; 0.0 1.0 0.0 1.0], Array{Int64,1}[[1, 2, 3, 4]], Array{Int64,1}[[1, 2],
-[1, 3], [2, 4], [3, 4]])
-```
 ## Illustrazione delle principali primitive
 
 In questa sezione vengono descritte le principali primitive contenute nel package `mapper.jl` oggetto del lavoro di ottimizzazione previsto dal progetto.
@@ -45,7 +83,7 @@ La funzione moltiplica ogni vertice per il rapporto fra l'angolo e i segmenti in
 Mappa ogni vertice come segue:
 
 
-![](../docs/src/images/coordinatepolari.gif){ width=20% }
+![](images/coordinatepolari.gif)
 
 e inserisce le coppie così generate in un vettore. Dopodiché affianca ogni vettore ottenendo una matrice con un numero di elementi doppi rispetto alla precedente.  
 Infine applica `simplifyCells` al risultato.
@@ -56,7 +94,7 @@ La descrizione della funzione è simile alla precedente. Per la creazione di ver
 La matrice V ottenuta possiede due righe ciascuna delle quali rappresenta i vertici di ciascuna delle due figure. Viene effettuato un prodotto fra V e una matrice 2 x 2 con il rapporto fra l'angolo e il numero segmenti inseriti in input rispettivamente per la prima e la seconda figura sulla diagonale principale e degli 0 sulla diagonale secondaria.  
 Vengono estratte una per volta tutte le colonne di V mappandole nel seguente modo:
 
-![](../docs/src/images/Immagine%202022-04-20%20134015.png){ width=40% }
+![](images/Immagine%202022-04-20%20134015.png)
 
 Infine applica `simplifyCells` al risultato.
 
