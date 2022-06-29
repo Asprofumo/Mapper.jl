@@ -94,7 +94,7 @@ La descrizione della funzione è simile alla precedente. Per la creazione di ver
 La matrice V ottenuta possiede due righe ciascuna delle quali rappresenta i vertici di ciascuna delle due figure. Viene effettuato un prodotto fra V e una matrice 2 x 2 con il rapporto fra l'angolo e il numero segmenti inseriti in input rispettivamente per la prima e la seconda figura sulla diagonale principale e degli 0 sulla diagonale secondaria.  
 Vengono estratte una per volta tutte le colonne di V mappandole nel seguente modo:
 
-![](images/Immagine%202022-04-20%20134015.png)
+![](images/ao.png)
 
 Infine applica `simplifyCells` al risultato.
 
