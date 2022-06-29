@@ -1,35 +1,9 @@
 <a name="logo"/>
 <div align="center">
 <a href="https://julialang.org/" target="_blank">
-<img src="docs/src/images/logo.svg" alt="Julia Logo" width="420" height="284"></img>
+<img src="docs/src/images/logo.svg" alt="Julia Logo" width="280" height="189"></img>
 </a>
 </div>
-
-<table>
-    <!-- Docs -->
-    <tr>
-        <td>Documentation</td>
-        <td>
-            <a href="https://docs.julialang.org"><img src='https://img.shields.io/badge/docs-v1-blue.svg'/></a>
-        </td>
-    </tr>
-    <!-- Continuous integration
-    To change the badge to point to a different pipeline, it is not sufficient to simply change the `?branch=` part.
-    You need to go to the Buildkite website and get the SVG URL for the correct pipeline. -->
-    <tr>
-        <td>Continuous integration</td>
-        <td>
-            <a href="https://buildkite.com/julialang/julia-master"><img src='https://badge.buildkite.com/f28e0d28b345f9fad5856ce6a8d64fffc7c70df8f4f2685cd8.svg?branch=master'/></a>
-        </td>
-    </tr>
-    <!-- Coverage -->
-    <tr>
-        <td>Code coverage</td>
-        <td>
-            <a href="https://coveralls.io/r/JuliaLang/julia?branch=master"><img src='https://img.shields.io/coveralls/github/JuliaLang/julia/master.svg?label=coveralls'/></a> <a href="https://codecov.io/github/JuliaLang/julia?branch=master"><img src='https://img.shields.io/codecov/c/github/JuliaLang/julia/master.svg?label=codecov'/></a>
-        </td>
-    </tr>
-</table>
 
 # LAR Mapper
 
@@ -40,6 +14,8 @@ Project **LAR Mapper** from **Calcolo Parallelo e Distribuito** developed by:
 |Filippo Iacobelli|582898|fil.iacobelli@stud.uniroma3.it| [https://github.com/ZoSo9999/](https://github.com/ZoSo9999/) |
 | Luca Rossicone |523938|luc.rossicone@stud.uniroma3.it|[https://github.com/Asprofumo/](https://github.com/Asprofumo/)|
 
+Documentation: [https://asprofumo.github.io/Mapper.jl/]
+
 ## Packages
 
 ```julia
@@ -48,6 +24,12 @@ Project **LAR Mapper** from **Calcolo Parallelo e Distribuito** developed by:
 (@v1.6) pkg> add DataStructures
 (@v1.6) pkg> add CUDA
 ```
+### ! Note: The `Studio Definitivo` notebook is for explanatory purposes only, as the code is meant to run on GPU!
+
+Consult Notebooks:
+ - `Studio Preliminare`: [https://github.com/Asprofumo/Mapper.jl/blob/master/notebooks/studiopreliminare.ipynb](https://github.com/Asprofumo/Mapper.jl/blob/master/notebooks/studiopreliminare.ipynb)
+ - `Studio Esecutivo`: [https://github.com/Asprofumo/Mapper.jl/blob/master/notebooks/studioesecutivo.ipynb](https://github.com/Asprofumo/Mapper.jl/blob/master/notebooks/studioesecutivo.ipynb)
+ - `Studio Definitivo`: [https://github.com/Asprofumo/Mapper.jl/blob/master/notebooks/studiodefinitivo.ipynb](https://github.com/Asprofumo/Mapper.jl/blob/master/notebooks/studiodefinitivo.ipynb)
 
 ## Mapper
 
