@@ -1,2 +1,235 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Introduzione · Mapper.jl</title><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.044/juliamono.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href><img src="../assets/logo.png" alt="Mapper.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href>Mapper.jl</a></span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li class="is-active"><a class="tocitem" href>Introduzione</a><ul class="internal"><li><a class="tocitem" href="#Matrici-Sparse"><span>Matrici Sparse</span></a></li><li><a class="tocitem" href="#Complessi-di-Celle"><span>Complessi di Celle</span></a></li><li><a class="tocitem" href="#Illustrazione-delle-principali-primitive"><span>Illustrazione delle principali primitive</span></a></li></ul></li><li><a class="tocitem" href="../stateart/">Stato dell&#39;arte</a></li><li><a class="tocitem" href="../indice/">API Reference</a></li><li><a class="tocitem" href="../grafodipendenze/">Dependecy Graph</a></li><li><a class="tocitem" href="../background/">BackGround Tecnologico</a></li><li><a class="tocitem" href="../applicazione/">Applicazione Pratica</a></li><li><a class="tocitem" href="../conclusioni/">Conclusione</a></li><li><a class="tocitem" href="../lar/">Lar Introduction</a></li><li><a class="tocitem" href="../mapper/">General Informations</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Introduzione</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Introduzione</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/Asprofumo/mapper.jl/blob/master/docs/src/intro.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Introduzione"><a class="docs-heading-anchor" href="#Introduzione">Introduzione</a><a id="Introduzione-1"></a><a class="docs-heading-anchor-permalink" href="#Introduzione" title="Permalink"></a></h1><p><img src="../images/sparse.png" alt/></p><p>Linear Algebric Representation (d&#39;ora in avanti LAR) LAR è uno schema di rappresentazione generale per la modellazione geometrica e topologica (vedi \&quot;Rappresentazione algebrica lineare per strutture topologiche\&quot;). Il dominio dello schema è fornito da complessi cellulari mentre il suo codominio è un insieme di matrici sparse. Altro non è che un package scritto in linguaggio Julia per il calcolo geometrico di figure piane e solide. Essa fa uso della API (Application Programming Interface) <a href="https://github.com/cvdlab/ViewerGL.jl">ViewerGL</a>, sviluppato dalla nostra università da una fork di <a href="https://github.com/plasm-language/pyplasm/tree/master/src/plasm.jl">Plasm.jl</a>.</p><h2 id="Matrici-Sparse"><a class="docs-heading-anchor" href="#Matrici-Sparse">Matrici Sparse</a><a id="Matrici-Sparse-1"></a><a class="docs-heading-anchor-permalink" href="#Matrici-Sparse" title="Permalink"></a></h2><p>Nell&#39;analisi numerica e nel calcolo scientifico, una matrice sparsa o un array sparso è una matrice in cui la maggior parte degli elementi è zero. Non esiste una definizione rigida per quanto riguarda la proporzione di elementi con valore zero affinché una matrice si qualifichi come sparsa, ma un criterio comune è che il numero di elementi diversi da zero è all&#39;incirca uguale al numero di righe o colonne. Al contrario, se la maggior parte degli elementi è diversa da zero, la matrice è considerata densa. Il numero di elementi di valore zero diviso per il numero totale di elementi (ad esempio, m × n per una matrice m × n) è talvolta indicato come la scarsità della matrice.</p><h2 id="Complessi-di-Celle"><a class="docs-heading-anchor" href="#Complessi-di-Celle">Complessi di Celle</a><a id="Complessi-di-Celle-1"></a><a class="docs-heading-anchor-permalink" href="#Complessi-di-Celle" title="Permalink"></a></h2><p>Una cella n-dimensionale chiusa è uno spazio topologico che è omeomorfo ad una palla chiusa n-dimensionale. Per esempio, un simplesso è una cella chiusa, e più in generale, un politopo convesso è una cella chiusa. Una cella n-dimensionale aperta è uno spazio topologico omeomorfo alla palla aperta n-dimensionale. Una cella 0-dimensionale aperta (e chiusa) è un punto. Informalmente, un complesso di celle è uno spazio topologico ottenuto incollando fra loro un certo numero di celle chiuse. Formalmente, un complesso di celle è uno spazio di Hausdorff <strong><span>$\chi$</span></strong> dotato di una partizione in celle aperte (di dimensioni variabili) che soddisfa due proprietà:</p><ol><li><p>Per ogni cella n-dimensionale aperta C nella partizione di X, esiste  una mappa continua f della palla n-dimensionale chiusa su X tale che</p><ul><li><p>la restrizione di f all&#39;interno della palla chiusa è un   omeomorfismo sulla cella C, e</p></li><li><p>l&#39;immagine del contorno della palla chiusa è contenuta   nell&#39;unione di un numero finito di celle aventi tutte dimensione   inferiore ad n.</p></li></ul></li><li><p>Un sottoinsieme di X è chiuso se e soltanto se incontra la chiusura  di ciascuna cella in un insieme chiuso.</p></li></ol><p>Il termine CW-complesso, mutuato dall&#39;inglese, è a volte usato come sinonimo di complesso di celle. Le lettere C e W indicano i termini inglesi closure-finite e weak-topology e si riferiscono alle due proprietà elencate (la seconda proprietà infatti indica che la topologia su X è in un certo senso una topologia debole).</p><h2 id="Illustrazione-delle-principali-primitive"><a class="docs-heading-anchor" href="#Illustrazione-delle-principali-primitive">Illustrazione delle principali primitive</a><a id="Illustrazione-delle-principali-primitive-1"></a><a class="docs-heading-anchor-permalink" href="#Illustrazione-delle-principali-primitive" title="Permalink"></a></h2><p>In questa sezione vengono descritte le principali primitive contenute nel package <code>mapper.jl</code> oggetto del lavoro di ottimizzazione previsto dal progetto.</p><h3 id="Lar.approxVal"><a class="docs-heading-anchor" href="#Lar.approxVal">Lar.approxVal</a><a id="Lar.approxVal-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.approxVal" title="Permalink"></a></h3><p>Lo scopo di questa funzione è molto semplice: fornendo in input un valore e un numero di cifre significative approssima il valore al numero di cifre richieste. Qualora il risultato fosse <code>-0.0</code> il segno viene cambiato.</p><h3 id="Lar.simplifyCells"><a class="docs-heading-anchor" href="#Lar.simplifyCells">Lar.simplifyCells</a><a id="Lar.simplifyCells-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.simplifyCells" title="Permalink"></a></h3><p>A causa di errori numerici sulle coordinate mappate potrebbero verificarsi duplicazioni di vertici. Questa funzione ausiliaria trova ed elimina vertici duplicati e celle errate. I paramentri di input sono CV (vettore di vettori) e V (matrice).   Viene creato un dizionario vertDict con chiave una colonne della matrice e valore un contatore incrementale. Per ogni vettore incell di CV la funzione crea un vettore vuoto outcell e per ogni elemento di v di incell preleva la colonna corrispondente di V. Applica la funzione <code>approxVal</code> ad ogni elemento della colonna.   Se la colonna non è presente nel dizionario, incrementa l&#39;indice e la inserisce nel dizionario con chiave il nuovo valore dell&#39;indice. Inoltre aggiunge l&#39;indice ad outcell e la colonna alla matrice W di output.   Se invece la colonna appartiene già al dizionario, aggiunge ad outcell l&#39;indice corrispondente presente nel dizionario. Infine l&#39;eliminazione dei duplicati da outcell avviene mediante la creazione di un <code>Set</code> che per definizione non può contenere valori uguali.</p><h3 id="Lar.circle"><a class="docs-heading-anchor" href="#Lar.circle">Lar.circle</a><a id="Lar.circle-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.circle" title="Permalink"></a></h3><p>Calcola l&#39;approssimazione di una circonferenza centrata nell&#39;origine prendendo come input raggio, angolo e numero di segmenti utilizzati per l&#39;approssimazione. Per la creazione di vertici e spigoli sfrutta la funzione <code>cuboidGrid</code> descritta nel modulo <code>largrid.jl</code>.   La funzione moltiplica ogni vertice per il rapporto fra l&#39;angolo e i segmenti inseriti in input.  Mappa ogni vertice come segue:</p><p><img src="../images/coordinatepolari.gif" alt/></p><p>e inserisce le coppie così generate in un vettore. Dopodiché affianca ogni vettore ottenendo una matrice con un numero di elementi doppi rispetto alla precedente.   Infine applica <code>simplifyCells</code> al risultato.</p><h3 id="Lar.toroidal"><a class="docs-heading-anchor" href="#Lar.toroidal">Lar.toroidal</a><a id="Lar.toroidal-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.toroidal" title="Permalink"></a></h3><p>Calcola una approssimazione del toro, ovvero una superficie di rotazione ottenuta dalla rivoluzione di una circonferenza in uno spazio tridimensionale intorno a un asse ad essa complanare. Gli input richiesti sono raggio e angolo della circonferenza e della superficie di rotazione, oltre al numero di segmenti richiesti per l&#39;approssimazione.   La descrizione della funzione è simile alla precedente. Per la creazione di vertici e spigoli sfrutta la funzione <code>simplexGrid</code> descritta nel modulo <code>simplexn.jl</code>.   La matrice V ottenuta possiede due righe ciascuna delle quali rappresenta i vertici di ciascuna delle due figure. Viene effettuato un prodotto fra V e una matrice 2 x 2 con il rapporto fra l&#39;angolo e il numero segmenti inseriti in input rispettivamente per la prima e la seconda figura sulla diagonale principale e degli 0 sulla diagonale secondaria.   Vengono estratte una per volta tutte le colonne di V mappandole nel seguente modo:</p><p><img src="../images/ao.png" alt/></p><p>Infine applica <code>simplifyCells</code> al risultato.</p><h3 id="Lar.cuboid"><a class="docs-heading-anchor" href="#Lar.cuboid">Lar.cuboid</a><a id="Lar.cuboid-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.cuboid" title="Permalink"></a></h3><p>Restituisce un cubo d-dimensionale dove d è la dimensione comune degli array di input <code>minpoint</code> e <code>maxpoint</code>.   Per la creazione di vertici e spigoli sfrutta la funzione <code>cuboidGrid</code> descritta nel modulo <code>largrid.jl</code>. Dopodiché tramite le funzioni esterne <code>s</code> e <code>t</code> crea delle matrici, le moltiplica fra loro e applica la funzione esterna <code>apply</code> al risultato.</p></article><nav class="docs-footer"><a class="docs-footer-nextpage" href="../stateart/">Stato dell&#39;arte »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.18 on <span class="colophon-date" title="Wednesday 29 June 2022 15:35">Wednesday 29 June 2022</span>. Using Julia version 1.6.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduzione · Mapper.jl</title>
+    <script data-outdated-warner src="../assets/warner.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.044/juliamono.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css" />
+    <script>documenterBaseURL = ".."</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"
+        data-main="../assets/documenter.js"></script>
+    <script src="../siteinfo.js"></script>
+    <script src="../../versions.js"></script>
+    <link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css"
+        data-theme-name="documenter-dark" data-theme-primary-dark />
+    <link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css"
+        data-theme-name="documenter-light" data-theme-primary />
+    <script src="../assets/themeswap.js"></script>
+</head>
+
+<body>
+    <div id="documenter">
+        <nav class="docs-sidebar"><a class="docs-logo" href="../index.html"><img src="../assets/logo.png" alt="Mapper.jl logo" /></a>
+            <div class="docs-package-name"><span class="docs-autofit"><a href="../index.html">Mapper.jl</a></span></div>
+            <form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query"
+                    name="q" type="text" placeholder="Search docs" /></form>
+            <ul class="docs-menu">
+                <li class="is-active"><a class="tocitem" href>Introduzione</a>
+                    <ul class="internal">
+                        <li><a class="tocitem" href="#Matrici-Sparse"><span>Matrici Sparse</span></a></li>
+                        <li><a class="tocitem" href="#Complessi-di-Celle"><span>Complessi di Celle</span></a></li>
+                        <li><a class="tocitem" href="#Illustrazione-delle-principali-primitive"><span>Illustrazione
+                                    delle principali primitive</span></a></li>
+                    </ul>
+                </li>
+                <li><a class="tocitem" href="../stateart/">Stato dell&#39;arte</a></li>
+                <li><a class="tocitem" href="../indice/">API Reference</a></li>
+                <li><a class="tocitem" href="../grafodipendenze/">Grafo delle Dipendenze</a></li>
+                <li><a class="tocitem" href="../background/">BackGround Tecnologico</a></li>
+                <li><a class="tocitem" href="../applicazione/">Applicazione Pratica</a></li>
+                <li><a class="tocitem" href="../conclusioni/">Conclusione</a></li>
+                <li><a class="tocitem" href="../lar/">Lar Introduction</a></li>
+                <li><a class="tocitem" href="../mapper/">General Informations</a></li>
+            </ul>
+            <div class="docs-version-selector field has-addons">
+                <div class="control"><span class="docs-label button is-static is-size-7">Version</span></div>
+                <div class="docs-selector control is-expanded">
+                    <div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div>
+                </div>
+            </div>
+        </nav>
+        <div class="docs-main">
+            <header class="docs-navbar">
+                <nav class="breadcrumb">
+                    <ul class="is-hidden-mobile">
+                        <li class="is-active"><a href>Introduzione</a></li>
+                    </ul>
+                    <ul class="is-hidden-tablet">
+                        <li class="is-active"><a href>Introduzione</a></li>
+                    </ul>
+                </nav>
+                <div class="docs-right"><a class="docs-edit-link"
+                        href="https://github.com/Asprofumo/mapper.jl/blob/master/docs/src/intro.md"
+                        title="Edit on GitHub"><span class="docs-icon fab"></span><span
+                            class="docs-label is-hidden-touch">Edit on GitHub</span></a><a
+                        class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#"
+                        title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop"
+                        id="documenter-sidebar-button" href="#"></a></div>
+            </header>
+            <article class="content" id="documenter-page">
+                <h1 id="Introduzione"><a class="docs-heading-anchor" href="#Introduzione">Introduzione</a><a
+                        id="Introduzione-1"></a><a class="docs-heading-anchor-permalink" href="#Introduzione"
+                        title="Permalink"></a></h1>
+                <p><img src="../images/sparse.png" alt /></p>
+                <p>Linear Algebric Representation (d&#39;ora in avanti LAR) LAR è uno schema di rappresentazione
+                    generale per la modellazione geometrica e topologica (vedi \&quot;Rappresentazione algebrica lineare
+                    per strutture topologiche\&quot;). Il dominio dello schema è fornito da complessi cellulari mentre
+                    il suo codominio è un insieme di matrici sparse. Altro non è che un package scritto in linguaggio
+                    Julia per il calcolo geometrico di figure piane e solide. Essa fa uso della API (Application
+                    Programming Interface) <a href="https://github.com/cvdlab/ViewerGL.jl">ViewerGL</a>, sviluppato
+                    dalla nostra università da una fork di <a
+                        href="https://github.com/plasm-language/pyplasm/tree/master/src/plasm.jl">Plasm.jl</a>.</p>
+                <h2 id="Matrici-Sparse"><a class="docs-heading-anchor" href="#Matrici-Sparse">Matrici Sparse</a><a
+                        id="Matrici-Sparse-1"></a><a class="docs-heading-anchor-permalink" href="#Matrici-Sparse"
+                        title="Permalink"></a></h2>
+                <p>Nell&#39;analisi numerica e nel calcolo scientifico, una matrice sparsa o un array sparso è una
+                    matrice in cui la maggior parte degli elementi è zero. Non esiste una definizione rigida per quanto
+                    riguarda la proporzione di elementi con valore zero affinché una matrice si qualifichi come sparsa,
+                    ma un criterio comune è che il numero di elementi diversi da zero è all&#39;incirca uguale al numero
+                    di righe o colonne. Al contrario, se la maggior parte degli elementi è diversa da zero, la matrice è
+                    considerata densa. Il numero di elementi di valore zero diviso per il numero totale di elementi (ad
+                    esempio, m × n per una matrice m × n) è talvolta indicato come la scarsità della matrice.</p>
+                <h2 id="Complessi-di-Celle"><a class="docs-heading-anchor" href="#Complessi-di-Celle">Complessi di
+                        Celle</a><a id="Complessi-di-Celle-1"></a><a class="docs-heading-anchor-permalink"
+                        href="#Complessi-di-Celle" title="Permalink"></a></h2>
+                <p>Una cella n-dimensionale chiusa è uno spazio topologico che è omeomorfo ad una palla chiusa
+                    n-dimensionale. Per esempio, un simplesso è una cella chiusa, e più in generale, un politopo
+                    convesso è una cella chiusa. Una cella n-dimensionale aperta è uno spazio topologico omeomorfo alla
+                    palla aperta n-dimensionale. Una cella 0-dimensionale aperta (e chiusa) è un punto. Informalmente,
+                    un complesso di celle è uno spazio topologico ottenuto incollando fra loro un certo numero di celle
+                    chiuse. Formalmente, un complesso di celle è uno spazio di Hausdorff
+                    <strong><span>$\chi$</span></strong> dotato di una partizione in celle aperte (di dimensioni
+                    variabili) che soddisfa due proprietà:</p>
+                <ol>
+                    <li>
+                        <p>Per ogni cella n-dimensionale aperta C nella partizione di X, esiste una mappa continua f
+                            della palla n-dimensionale chiusa su X tale che</p>
+                        <ul>
+                            <li>
+                                <p>la restrizione di f all&#39;interno della palla chiusa è un omeomorfismo sulla cella
+                                    C, e</p>
+                            </li>
+                            <li>
+                                <p>l&#39;immagine del contorno della palla chiusa è contenuta nell&#39;unione di un
+                                    numero finito di celle aventi tutte dimensione inferiore ad n.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p>Un sottoinsieme di X è chiuso se e soltanto se incontra la chiusura di ciascuna cella in un
+                            insieme chiuso.</p>
+                    </li>
+                </ol>
+                <p>Il termine CW-complesso, mutuato dall&#39;inglese, è a volte usato come sinonimo di complesso di
+                    celle. Le lettere C e W indicano i termini inglesi closure-finite e weak-topology e si riferiscono
+                    alle due proprietà elencate (la seconda proprietà infatti indica che la topologia su X è in un certo
+                    senso una topologia debole).</p>
+                <h2 id="Illustrazione-delle-principali-primitive"><a class="docs-heading-anchor"
+                        href="#Illustrazione-delle-principali-primitive">Illustrazione delle principali primitive</a><a
+                        id="Illustrazione-delle-principali-primitive-1"></a><a class="docs-heading-anchor-permalink"
+                        href="#Illustrazione-delle-principali-primitive" title="Permalink"></a></h2>
+                <p>In questa sezione vengono descritte le principali primitive contenute nel package
+                    <code>mapper.jl</code> oggetto del lavoro di ottimizzazione previsto dal progetto.</p>
+                <h3 id="Lar.approxVal"><a class="docs-heading-anchor" href="#Lar.approxVal">Lar.approxVal</a><a
+                        id="Lar.approxVal-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.approxVal"
+                        title="Permalink"></a></h3>
+                <p>Lo scopo di questa funzione è molto semplice: fornendo in input un valore e un numero di cifre
+                    significative approssima il valore al numero di cifre richieste. Qualora il risultato fosse
+                    <code>-0.0</code> il segno viene cambiato.</p>
+                <h3 id="Lar.simplifyCells"><a class="docs-heading-anchor"
+                        href="#Lar.simplifyCells">Lar.simplifyCells</a><a id="Lar.simplifyCells-1"></a><a
+                        class="docs-heading-anchor-permalink" href="#Lar.simplifyCells" title="Permalink"></a></h3>
+                <p>A causa di errori numerici sulle coordinate mappate potrebbero verificarsi duplicazioni di vertici.
+                    Questa funzione ausiliaria trova ed elimina vertici duplicati e celle errate. I paramentri di input
+                    sono CV (vettore di vettori) e V (matrice). Viene creato un dizionario vertDict con chiave una
+                    colonne della matrice e valore un contatore incrementale. Per ogni vettore incell di CV la funzione
+                    crea un vettore vuoto outcell e per ogni elemento di v di incell preleva la colonna corrispondente
+                    di V. Applica la funzione <code>approxVal</code> ad ogni elemento della colonna. Se la colonna non è
+                    presente nel dizionario, incrementa l&#39;indice e la inserisce nel dizionario con chiave il nuovo
+                    valore dell&#39;indice. Inoltre aggiunge l&#39;indice ad outcell e la colonna alla matrice W di
+                    output. Se invece la colonna appartiene già al dizionario, aggiunge ad outcell l&#39;indice
+                    corrispondente presente nel dizionario. Infine l&#39;eliminazione dei duplicati da outcell avviene
+                    mediante la creazione di un <code>Set</code> che per definizione non può contenere valori uguali.
+                </p>
+                <h3 id="Lar.circle"><a class="docs-heading-anchor" href="#Lar.circle">Lar.circle</a><a
+                        id="Lar.circle-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.circle"
+                        title="Permalink"></a></h3>
+                <p>Calcola l&#39;approssimazione di una circonferenza centrata nell&#39;origine prendendo come input
+                    raggio, angolo e numero di segmenti utilizzati per l&#39;approssimazione. Per la creazione di
+                    vertici e spigoli sfrutta la funzione <code>cuboidGrid</code> descritta nel modulo
+                    <code>largrid.jl</code>. La funzione moltiplica ogni vertice per il rapporto fra l&#39;angolo e i
+                    segmenti inseriti in input. Mappa ogni vertice come segue:</p>
+                <p><img src="../images/coordinatepolari.gif" alt /></p>
+                <p>e inserisce le coppie così generate in un vettore. Dopodiché affianca ogni vettore ottenendo una
+                    matrice con un numero di elementi doppi rispetto alla precedente. Infine applica
+                    <code>simplifyCells</code> al risultato.</p>
+                <h3 id="Lar.toroidal"><a class="docs-heading-anchor" href="#Lar.toroidal">Lar.toroidal</a><a
+                        id="Lar.toroidal-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.toroidal"
+                        title="Permalink"></a></h3>
+                <p>Calcola una approssimazione del toro, ovvero una superficie di rotazione ottenuta dalla rivoluzione
+                    di una circonferenza in uno spazio tridimensionale intorno a un asse ad essa complanare. Gli input
+                    richiesti sono raggio e angolo della circonferenza e della superficie di rotazione, oltre al numero
+                    di segmenti richiesti per l&#39;approssimazione. La descrizione della funzione è simile alla
+                    precedente. Per la creazione di vertici e spigoli sfrutta la funzione <code>simplexGrid</code>
+                    descritta nel modulo <code>simplexn.jl</code>. La matrice V ottenuta possiede due righe ciascuna
+                    delle quali rappresenta i vertici di ciascuna delle due figure. Viene effettuato un prodotto fra V e
+                    una matrice 2 x 2 con il rapporto fra l&#39;angolo e il numero segmenti inseriti in input
+                    rispettivamente per la prima e la seconda figura sulla diagonale principale e degli 0 sulla
+                    diagonale secondaria. Vengono estratte una per volta tutte le colonne di V mappandole nel seguente
+                    modo:</p>
+                <p><img src="../images/ao.png" alt /></p>
+                <p>Infine applica <code>simplifyCells</code> al risultato.</p>
+                <h3 id="Lar.cuboid"><a class="docs-heading-anchor" href="#Lar.cuboid">Lar.cuboid</a><a
+                        id="Lar.cuboid-1"></a><a class="docs-heading-anchor-permalink" href="#Lar.cuboid"
+                        title="Permalink"></a></h3>
+                <p>Restituisce un cubo d-dimensionale dove d è la dimensione comune degli array di input
+                    <code>minpoint</code> e <code>maxpoint</code>. Per la creazione di vertici e spigoli sfrutta la
+                    funzione <code>cuboidGrid</code> descritta nel modulo <code>largrid.jl</code>. Dopodiché tramite le
+                    funzioni esterne <code>s</code> e <code>t</code> crea delle matrici, le moltiplica fra loro e
+                    applica la funzione esterna <code>apply</code> al risultato.</p>
+            </article>
+            <nav class="docs-footer"><a class="docs-footer-nextpage" href="../stateart/">Stato dell&#39;arte »</a>
+                <div class="flexbox-break"></div>
+                <p class="footer-message">Powered by <a
+                        href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a
+                        href="https://julialang.org/">Julia Programming Language</a>.</p>
+            </nav>
+        </div>
+        <div class="modal" id="documenter-settings">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Settings</p><button class="delete"></button>
+                </header>
+                <section class="modal-card-body">
+                    <p><label class="label">Theme</label>
+                    <div class="select"><select id="documenter-themepicker">
+                            <option value="documenter-light">documenter-light</option>
+                            <option value="documenter-dark">documenter-dark</option>
+                        </select></div>
+                    </p>
+                    <hr />
+                    <p>This document was generated with <a
+                            href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.18 on <span
+                            class="colophon-date" title="Wednesday 29 June 2022 16:12">Wednesday 29 June 2022</span>.
+                        Using Julia version 1.6.5.</p>
+                </section>
+                <footer class="modal-card-foot"></footer>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

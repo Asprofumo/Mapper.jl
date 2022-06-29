@@ -8,7 +8,7 @@ makedocs(
         "Introduzione" => "intro.md",
         "Stato dell'arte" => "stateart.md",
         "API Reference" => "indice.md",
-        "Dependecy Graph" => "grafodipendenze.md",
+        "Grafo delle Dipendenze" => "grafodipendenze.md",
         "BackGround Tecnologico" => "background.md",
         "Applicazione Pratica" => "applicazione.md",
         "Conclusione" => "conclusioni.md",
