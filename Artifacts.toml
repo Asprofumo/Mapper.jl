@@ -1,6 +1,0 @@
-[domain]
-git-tree-sha1 = "2c15c61b0065248ea7b48eff8406746b37bffa99"
-
-    [[domain.download]]
-    sha256 = "68058760f1b4ed5d2c161514d7f0ad6d7e221278dcca98efeb41e1160739c5a1"
-    url = "https://github.com/Asprofumo/Mapper.jl/blob/main/domain.tar.gz"
