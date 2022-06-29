@@ -1,7 +1,7 @@
 <a name="logo"/>
 <div align="center">
 <a href="https://julialang.org/" target="_blank">
-<img src="images/logo.svg" alt="Julia Logo" width="420" height="284"></img>
+<img src="docs/src/images/logo.svg" alt="Julia Logo" width="420" height="284"></img>
 </a>
 </div>
 
