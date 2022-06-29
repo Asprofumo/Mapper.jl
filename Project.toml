@@ -1,0 +1,14 @@
+name = "Mapper"
+uuid = "64165e63-884e-49db-8e28-72afc3b724d1"
+authors = ["zoso9999 <fil.iacobelli@stud.uniroma3.it>"]
+version = "0.1.0"
+
+[deps]
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+IntelVectorMath = "c8ce9da6-5d36-5c03-b118-5a70151be7bc"
+LinearAlgebraicRepresentation = "95167b0c-186a-594b-a231-52369c6de044"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+[targets]
+test = ["Test"]
