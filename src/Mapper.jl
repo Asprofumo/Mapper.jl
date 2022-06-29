@@ -101,7 +101,7 @@ With default values, i.e. `circleOpt()()`, return the whole circonference of uni
 
 # Example
 ```julia
-julia> W,CW = Lar.circleOpt()();
+julia> W,CW = Lar.circleOpt();
 
 julia> GL.VIEW([
 	GL.GLLines(W, CW, GL.COLORS[12]),
@@ -355,6 +355,8 @@ function toroidal(r=1., R=2., angle1=2*pi, angle2=2*pi)
     return toroidal0
 end
 
+
+
 """
 	toroidalOpt(r=1., R=2., angle1=2*pi, angle2=2*pi)(shape=[24, 36])
 
@@ -364,7 +366,7 @@ It does not calculate the domain but retrieves it from the specific artifact.
 # Example
 ```julia
 julia> GL.VIEW([
-	GL.GLGrid( Lar.toroidalOpt()()..., GL.COLORS[1],0.75 ),
+	GL.GLGrid( Lar.toroidalOpt()..., GL.COLORS[1],0.75 ),
 	GL.GLFrame
 ]);
 ```

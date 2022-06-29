@@ -62,7 +62,7 @@ function createArtifacts()
     end
     tarball_hash = archive_artifact(hash, "domain.tar.gz")
     bind_artifact!("Artifacts.toml", "domain", hash,
-        download_info=[("https://bitbucket.org/zoso9999/linearalgebraicrepresentation/src/filippo/domain.tar.gz", 
+        download_info=[("https://github.com/Asprofumo/Mapper.jl/blob/main/domain.tar.gz", 
                         tarball_hash)])
 end
 
