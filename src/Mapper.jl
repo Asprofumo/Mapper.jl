@@ -6,6 +6,8 @@ using LinearAlgebraicRepresentation
 Lar = LinearAlgebraicRepresentation
 
 
+
+
 """
 	approxVal(PRECISION)(value)
 
@@ -36,30 +38,10 @@ PRECISION number of significant digits.
 """
 function simplifyCells(V,CV)::Tuple{Matrix{Float64},Vector{Vector{Int64}}}
 	PRECISION = 5
-	vertDict = DefaultDict{Array{Float64,1}, Int64}(0)
-	index = 0
-	W = Array{Float64,1}[]
-	FW = Array{Int64,1}[]
-
-	@inbounds @simd for incell in CV
-		outcell = Int64[]
-		@inbounds @simd for v in incell
-			vert = @view V[:,v]
-			key = map(Lar.approxVal(PRECISION), vert)
-			if vertDict[key]==0
-				index += 1
-				vertDict[key] = index
-				push!(outcell, index)
-				push!(W,key)
-			else
-				push!(outcell, vertDict[key])
-			end
-		end
-		append!(FW, [[Set(outcell)...]])
-	end
-	return hcat(W...),FW
+	W = permutedims(hcat(Set(map(p->broadcast(Lar.approxVal(PRECISION),p),collect.(eachcol(V))))...))
+	CW = map(p->broadcast(%,p,length(W)),CV)
+	W,CW
 end
-
 
 
 """
@@ -79,13 +61,12 @@ julia> GL.VIEW([
 ]);
 ```
 """
-function circle(radius=1., angl=2*pi)
-    function circle0(shape=[36])
+function circle(radius=1., angle=2*pi)
+    function circle0(shape=[3600])
         V, EV = Lar.cuboidGrid(shape)
-        V = CUDA.@sync V.*angl/shape[1]
-        CUDA.@sync map(x -> circle_map(x,radius), V)
-        V = hcat(V...)
-        W, EW = simplifyCells(V, EV)
+        V = (angle/shape[1])*V
+        V = hcat(map(u->[radius*cos(u); radius*sin(u)], V)...)
+        W, EW = Lar.simplifyCells(V, EV)
         return W, EW
     end
     return circle0
@@ -138,9 +119,12 @@ function helix(radius=1., pitch=1., nturns=2)
     function helix0(shape=36*nturns)
         angl = nturns*2*pi
         V, EV = Lar.cuboidGrid([shape])
-        V = CUDA.@sync V.*(angl/shape)
-        CUDA.@sync map(x -> helix_map(x,radius,pitch),V)
-        V = hcat(V...)
+        v = CuArray(V)
+        v = v.*angl/shape
+        sinV = sin.(v); cosV = cos.(v)
+        u = vcat(cosV.*radius,sinV.*radius,v.*(pitch/(2*pi)))
+        V = Array{Float32}(undef, length(v), 3)
+        copyto!(V,u)
         W, EW = simplifyCells(V, EV)
         return W, EW
     end
@@ -169,10 +153,8 @@ function disk(radius=1., angl=2*pi)
         V = collect(eachrow(C*V))
         u = first(V); z = last(V)
         sinU = sin.(u); cosU = cos.(u)
-        V = Array{Float32}(undef, length(u), 2)
         v = hcat(z.*cosU, z.*sinU)
-        copyto!(V,v)
-        W, FW = simplifyCells(V', FV)
+        W, FW = simplifyCells(v, FV)
         FW = [cell for cell in FW if length(cell)==3]
         return W, FW
     end
@@ -237,9 +219,7 @@ function ring(r=1., R=2., angl=2*pi)
         z = z.+r
         cosU = cos.(u); sinU = sin.(u)
         v = hcat(z.*cosU, z.*sinU)
-        V = Array{Float32}(undef, length(u), 2)
-        copyto!(V,v)
-        W, CW = simplifyCells(V', CV)
+        W, CW = simplifyCells(v, CV)
 		CW = [cell for cell in CW if length(cell)==3]
 		return W,CW
     end
@@ -271,9 +251,7 @@ function cylinder(radius=.5, height=2., angl=2*pi)
         u = first(V); z = last(V)
         cosU = cos.(u); sinU = sin.(u)
         v = hcat(cosU.*radius, sinU.*radius, z.*height)
-        V = Array{Float32}(undef, length(u), 3)
-        copyto!(V,v)
-        W, CW = simplifyCells(V', CV)
+        W, CW = simplifyCells(v, CV)
         return W, CW
     end
     return cylinder0
@@ -306,9 +284,7 @@ function sphere(radius=1., angle1=pi, angle2=2*pi, surface=triangled)
         sinU = sin.(u); sinZ = sin.(z)
         cosU = cos.(u); cosZ = cos.(z)
         v = hcat(cosU.*cosZ.*radius, cosU.*sinZ.*radius, sinU.*radius)
-        V = Array{Float32}(undef, length(u), 3)
-        copyto!(V,v)
-        W, CW = simplifyCells(V', CV)
+        W, CW = simplifyCells(v, CV)
         CW = [triangle for triangle in CW if length(triangle)==3]
         if Int(surface)==1
         	return W, CW
@@ -347,9 +323,7 @@ function toroidal(r=1., R=2., angle1=2*pi, angle2=2*pi)
         cosU = cos.(u); cosZ = cos.(z)
         tmp = cosU.*r.+R
         v = hcat(tmp.*cosZ, tmp.*sinZ, -r*sinU)
-        V = Array{Float32}(undef, length(u), 3)
-        copyto!(V,v)
-        W, CW = Lar.simplifyCells(V', CV)
+        W, CW = Lar.simplifyCells(v, CV)
         return W, CW
     end
     return toroidal0
@@ -410,9 +384,7 @@ function crown(r=1., R=2., angl=2*pi)
         cosU = cos.(u); cosZ = cos.(z)
         tmp = cosU.*r.+R
         v = hcat(tmp.*cosZ, tmp.*sinZ, -r*sinU)
-        V = Array{Float32}(undef, length(u), 3)
-        copyto!(V,v)
-        W, CW = simplifyCells(V', CV)
+        W, CW = simplifyCells(v, CV)
         return W, CW
     end
     return crown0
@@ -519,9 +491,7 @@ function ball(radius=1, angle1=pi, angle2=2*pi)
         cosU = cos.(u); cosZ = cos.(z)
         tmp = cosU.*k
         v = hcat(tmp.*cosZ, tmp.*sinZ, k.*sinU)
-        V = Array{Float32}(undef, length(u), 3)
-        copyto!(V,v)
-        W, CW = simplifyCells(V', CV)
+        W, CW = simplifyCells(v, CV)
         return W, CW
     end
     return ball0
@@ -587,9 +557,7 @@ function hollowCyl(r=1., R=2., height=6., angl=2*pi)
         sinU = sin.(u)
         cosU = cos.(u)
         v = hcat(z.*cosU, z.*sinU, k)
-        V = Array{Float32}(undef, length(u), 3)
-        copyto!(V,v)
-        W, CW = simplifyCells(V', CV)
+        W, CW = simplifyCells(v, CV)
         return W, CW
     end
     return hollowCyl0
@@ -625,9 +593,7 @@ function hollowBall(r=1., R=1., angle1=pi, angle2=2*pi)
         cosU = cos.(u); cosZ = cos.(z)
         tmp = cosU.*k
         v = hcat(tmp.*cosZ, tmp.*sinZ, k.*sinU)
-        V = Array{Float32}(undef, length(u), 3)
-        copyto!(V,v)
-        W, CW = simplifyCells(V', CV)
+        W, CW = simplifyCells(v, CV)
         return W, CW
     end
     return hollowBall0
@@ -659,9 +625,7 @@ function torus(r=1., R=2., h=.5, angle1=2*pi, angle2=2*pi)
         cosU = cos.(u); cosZ = cos.(z)
         tmp = z.+R.*cosU
         v = hcat(tmp.*cosZ, tmp.*sinZ, -k.*sinU)
-        V = Array{Float32}(undef, length(u), 3)
-        copyto!(V,v)
-        W, CW = simplifyCells(V', CV)
+        W, CW = simplifyCells(v, CV)
         return W, CW
     end
     return torus0
