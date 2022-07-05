@@ -1,8 +1,11 @@
-# Reference
-This page has references to all exported types and functions.
+# Riferimenti
+Questa pagina contiene riferimenti a tutti i tipi e funzioni esportati.
 
-## Functions
+## Funzioni
 ```@autodocs
 Modules = [Mapper]
-Order = [:type,:function]
+Order = [:function]
+```
+```@docs
+Mapper.func(x)
 ```
